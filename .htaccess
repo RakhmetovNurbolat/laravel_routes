@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    DirectoryIndex /public/index.php
+    RewriteEngine On
+
+    RewriteBase /
+    RewriteCond %{HTTP_HOST} (.*)
+    RewriteCond %{REQUEST_URI} /$ [NC]
+    RewriteRule ^(.*)(/)$ $1 [L,R=301]
+
+    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+    RewriteRule ^(.+) /public/$1 [L]
+
+    RewriteRule ^(.*)$ /public/ [QSA,L]
+</IfModule>
